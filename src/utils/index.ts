@@ -142,6 +142,15 @@ export const coffeeOptions: ICoffeeOption[] = [
 
 const halfLifeHours = 5;
 
+/**
+ * Calculate the current caffeine level based on the provided coffee consumption history.
+ *
+ * @param historyData - Object with timestamps as keys and coffee consumption entries as values.
+ * @returns The calculated current caffeine level in milligrams.
+ *
+ * The calculation uses the concept of half-life, where the caffeine level is halved every 5 hours.
+ * The method takes into account caffeine consumption entries up to 48 hours in the past.
+ */
 export function calculateCurrentCaffeineLevel(
   historyData: ICoffeeConsumptionHistory
 ) {
@@ -208,6 +217,18 @@ export function getTopThreeCoffees(historyData: ICoffeeConsumptionHistory) {
   return topThree;
 }
 
+/**
+ * Converts a given UTC millisecond timestamp to a human-readable string
+ * displaying the time elapsed since that timestamp.
+ *
+ * The string will be in the format "X months Y days Z hours W minutes V
+ * seconds", where any unit with a value of 0 is excluded, and the
+ * remaining units are displayed in descending order of magnitude.
+ *
+ * @param {number} utcMilliseconds - The timestamp in UTC milliseconds
+ * @returns {string} A human-readable string representing the time elapsed
+ * since the given timestamp
+ */
 export function timeSinceConsumption(utcMilliseconds: number) {
   const now = Date.now();
   const diffInMilliseconds = now - utcMilliseconds;
