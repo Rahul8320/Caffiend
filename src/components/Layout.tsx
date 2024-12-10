@@ -1,17 +1,21 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
+import Modal from "./Modal";
+import Authentication from "./Authentication";
 
 type IProps = {
   children: ReactNode;
 };
 
 function Layout({ children }: IProps) {
+  const [showModal, setShowModal] = useState<boolean>(false);
+
   const header = (
     <header>
       <div>
         <h1 className="text-gradient">CAFFIEND</h1>
         <p>For Coffee Insatiate</p>
       </div>
-      <button>
+      <button onClick={() => setShowModal(true)}>
         <p>Sign up free</p>
         <i className="fa-solid fa-mug-hot"></i>
       </button>
@@ -42,6 +46,15 @@ function Layout({ children }: IProps) {
 
   return (
     <>
+      {showModal && (
+        <Modal
+          handleCloseModal={() => {
+            setShowModal(false);
+          }}
+        >
+          <Authentication />
+        </Modal>
+      )}
       {header}
       <main>{children}</main>
       {footer}
