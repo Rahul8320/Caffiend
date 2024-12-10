@@ -3,7 +3,14 @@ import { coffeeOptions } from "../utils";
 
 function CoffeeForm() {
   const [selectedCoffee, setSelectedCoffee] = useState<string | null>(null);
-  const [showCoffeeType, setShowCoffeeType] = useState(false);
+  const [showCoffeeType, setShowCoffeeType] = useState<boolean>(false);
+  const [coffeeCost, setCoffeeCost] = useState<number>(0);
+  const [min, setMin] = useState<number>(0);
+  const [hour, setHour] = useState<number>(0);
+
+  function handleSubmit() {
+    console.log(selectedCoffee, coffeeCost, hour, min);
+  }
 
   return (
     <>
@@ -63,12 +70,27 @@ function CoffeeForm() {
         </select>
       )}
       <h4>Add the cost ($)</h4>
-      <input className="w-full" type="number" placeholder="4.50" min={0.5} />
+      <input
+        className="w-full"
+        type="number"
+        value={coffeeCost}
+        onChange={(e) => {
+          setCoffeeCost(parseFloat(e.target.value));
+        }}
+        placeholder="4.50"
+        min={0.5}
+      />
       <h4>Time since consumption</h4>
       <div className="time-entry">
         <div>
           <h6>Hours</h6>
-          <select id="hours-select">
+          <select
+            value={hour}
+            onChange={(e) => {
+              setHour(parseInt(e.target.value));
+            }}
+            id="hours-select"
+          >
             {[
               0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
               19, 20, 21, 22, 23, 24,
@@ -83,7 +105,13 @@ function CoffeeForm() {
         </div>
         <div>
           <h6>Mins</h6>
-          <select id="hours-select">
+          <select
+            value={min}
+            onChange={(e) => {
+              setMin(parseInt(e.target.value));
+            }}
+            id="hours-select"
+          >
             {[0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55].map(
               (min, minIndex) => {
                 return (
@@ -96,7 +124,7 @@ function CoffeeForm() {
           </select>
         </div>
       </div>
-      <button>
+      <button type="submit" onClick={handleSubmit}>
         <p>Add Entry</p>
       </button>
     </>
