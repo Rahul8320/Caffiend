@@ -30,6 +30,12 @@ function Layout({ children }: IProps) {
           FantaCSS
         </a>{" "}
         design library.
+        <br />
+        Check out the project on{" "}
+        <a href="https://github.com/Rahul8320/Caffiend" target="_blank">
+          Github
+        </a>
+        !
       </p>
     </footer>
   );
