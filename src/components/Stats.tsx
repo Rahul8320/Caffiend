@@ -3,6 +3,7 @@ import {
   calculateCoffeeStats,
   calculateCurrentCaffeineLevel,
   coffeeConsumptionHistory,
+  getTopThreeCoffees,
   statusLevels,
 } from "../utils";
 
@@ -77,6 +78,26 @@ function Stats() {
             $ <span className="stat-text">{stats.total_cost}</span>
           </p>
         </StatCard>
+        <table className="stat-table">
+          <thead>
+            <tr>
+              <th>Coffee Name</th>
+              <th>Number of Purchase</th>
+              <th>Percentage of Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {getTopThreeCoffees(coffeeConsumptionHistory).map(
+              (coffee, coffeeIndex) => (
+                <tr key={coffeeIndex}>
+                  <td>{coffee.coffeeName}</td>
+                  <td>{coffee.count}</td>
+                  <td>{coffee.percentage}</td>
+                </tr>
+              )
+            )}
+          </tbody>
+        </table>
       </div>
     </>
   );
