@@ -153,7 +153,7 @@ const halfLifeHours = 5;
  */
 export function calculateCurrentCaffeineLevel(
   historyData: ICoffeeConsumptionHistory
-) {
+): number {
   const currentTime = Date.now();
   const halfLife = halfLifeHours * 60 * 60 * 1000; // 5 hours in milliseconds
   const maxAge = 48 * 60 * 60 * 1000; // 48 hours in milliseconds
@@ -173,7 +173,7 @@ export function calculateCurrentCaffeineLevel(
     }
   }
 
-  return totalCaffeine.toFixed(2);
+  return parseFloat(totalCaffeine.toFixed(2));
 }
 
 // Helper function to get caffeine amount based on the coffee name
@@ -302,7 +302,7 @@ export function calculateCoffeeStats(
       : 0;
   const averageDailyCost =
     totalDaysWithCoffee > 0 ? (totalCost / totalDaysWithCoffee).toFixed(2) : 0;
-  console.log(totalCost, typeof totalCost);
+
   return {
     daily_caffeine: averageDailyCaffeine,
     daily_cost: averageDailyCost,
